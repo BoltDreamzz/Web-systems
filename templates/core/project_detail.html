@@ -1,0 +1,138 @@
+{% extends "partials/base.html" %}
+{% block title %}Project detail{% endblock %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .container {
+        padding: 20px 10px;
+    }
+    .project-image {
+        width: 100%;
+        max-height: 500px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    .project-image img {
+        width: 100%;
+        height: auto;
+    }
+    .project-details {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .project-details h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .project-details p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+    .bg-body-tertiary {
+        background-color: rgba(0, 0, 0, 1.4);
+    }
+    .comment-box {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        padding: 7px;
+}
+
+#comment-textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: vertical; /* Allow vertical resizing */
+}
+</style>
+<div class="container-fluid project-image">
+    <!--    <div class="">-->
+    <img src="{{ project.image.url }}" alt="{{ project.title }}">
+    <!--    </div>-->
+</div>
+<!--<div class="container">-->
+<div class="project-details">
+    <div class="d-flex align-items-center justify-content-between">
+        <h2><strong>{{ project.title }}</strong></h2>
+        <h6><strong>Client:</strong> <span class="badge bg-dark shadow-sm">{{ project.client }}</span></h6>
+    </div>
+    <small class="text-muted"><i class="bi bi-calendar3"></i> {{ project.start_date }} - {{ project.end_date }}</small>
+
+    <p><strong>Description:</strong> {{ project.description }}</p>
+    <hr>
+    <a href="#"
+       class="d-flex mb-2 align-items-center link-body-emphasis text-decoration-none">
+        <img src="https://github.com/mdo.png" alt="" width="40" height="40"
+             class="rounded-circle me-2">
+        <strong>{% if project.champion %}{{ project.champion.user.username }}{% else %}Someone{% endif %} <i
+                class="bi text-primary bi-patch-check-fill"></i></strong>
+    </a>
+    <p><strong>Service: </strong><span class="badge bg-body-secondary text-primary">{{project.service.title}}</span></p>
+    <p><strong>Technologies used: </strong>{%for t in project.technologies_used.all%}<span
+            class="badge bg-body-secondary text-secondary">{{t.name}}</span> {%endfor%}</p>
+
+    <hr>
+</div>
+<hr>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4>Comments {% if comment_count != 0 %}<span class="badge bg-body-tertiary text-primary">{{ comment_count }}</span>{% endif %}
+        </h4>
+        <p>Sort <i class="bi bi-filter-circle-fill"></i>
+        </p>
+    </div>
+    {% if comments %}
+    <div class="row g-4 py-2 row-cols-md-3 flex-wrap">
+        {% for comment in comments %}
+        <div class="col col-md-4 col-sm-4 col-lg-4 border mx-2 rounded-2 p-2 shadow-sm">
+            <div class="d-flex">
+                <h6 class="fs-5 text-body-emphasis text-primary">{{ comment.user.username }}</h6>
+                <!--                <small class="text-muted">{{comment.created_at|timesince}}</small>-->
+
+            </div>
+            <p class="fs-6">{{ comment.content }}</p>
+            <div class="d-flex justify-content-center align-items-center px-2">
+                <a href="#" class="icon-link"><i class="bi bi-pencil-square mx-2"></i></a>
+                <a href="#" class="icon-link"><i class="bi bi-trash-fill mx-2"></i></a>
+                <a href="#" class="icon-link"><i class="bi bi-heart mx-2"></i></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="text-center">
+        <img width="120" src="{% static 'app_images/comment.png' %}" alt="">
+    </div>
+    <h6 class="text-center mt-2">
+        No comments yet <br>
+        <a href="#">Be the first to comment</a>
+    </h6>
+    {% endif %}
+    <div class="container">
+        <form method="post" action="{% url 'core:project_detail' project_id=project.id %}">
+            {% csrf_token %}
+            <div class="comment-box">
+                {{ form.content.errors }}
+                <textarea id="comment-textarea" name="content" rows="2" placeholder="Write comments here"
+                          required></textarea>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-dark rounded-pill w-50" type="submit"><i class="bi bi-send-fill"></i> Comment
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<hr>
+{% comment %} <br><br><br><br><br><br><br><br><br><br> {% endcomment %}
+
+{% endblock %}

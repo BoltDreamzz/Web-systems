@@ -1,0 +1,117 @@
+/* .active {
+    border-bottom: 2px solid white;
+} */
+
+body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Sedan", serif;
+    }
+.navbar {
+    background: #151515;
+    min-height: 80px;
+}
+.footer-container {
+    background: #151515;
+
+}
+#loading-screen {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+    transform: rotate(0deg);
+    }
+    100% {
+    transform: rotate(360deg);
+    }
+}
+
+/* Style for floating message icon */
+.message-icon {
+    position: fixed;
+    bottom: 100px;
+    right: 40px;
+    z-index: 10000; /* Ensure it's above other content */
+    shadow: 2px black rgba(0,0,0,0.6);
+    /* Add any additional styling you need */
+}
+
+/* Style for tooltip */
+.tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+}
+
+.message-icon:hover + .tooltip {
+    display: block;
+}
+
+.hoverme {
+    background-color: #151515;
+    color: #fff;
+}
+
+.hoverme:hover {
+    background: #151515;
+    color: #fff;
+}
+
+.hoverme_outline {
+    border: 2px solid #151515;
+    color: #6367AF;
+}
+
+.hoverme_outline:hover {
+    border: 2px solid #151515;
+    color: #313559;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
