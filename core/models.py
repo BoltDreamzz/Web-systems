@@ -1,5 +1,5 @@
 from django.db import models
-from taggit.managers import TaggableManager
+# from taggit.managers import TaggableManager
 
 from authusers.models import User
 
@@ -24,13 +24,12 @@ class Technology(models.Model):
     
 class Project(models.Model):
     title = models.CharField(max_length=100)
-    description =  models.TextField()
+    description = models.TextField()
     start_date = models.DateTimeField(auto_now_add=True)
     client = models.CharField(max_length=100)
     champion = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     team = models.ManyToManyField("TeamMember", related_name="projects")
-    tag = TaggableManager()
     technology_used = models.ManyToManyField(Technology, related_name="projects")
 
     views = models.PositiveIntegerField(default=0)
@@ -45,6 +44,7 @@ class Project(models.Model):
     
 
 class TeamMember(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
     position = models.CharField(max_length=100, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)

@@ -20,27 +20,25 @@
     }
     .h1{
         font-size: 40px;
-        font-family: "Cutive", serif;
-
     }
     .form-control {
-        border-radius: 50px;
+        border-radius: 15px;
+        padding: 15px 40px;
+
     }    
     .off-color, .display-7 {
         color: #C73659;
     }
-    @media screen and (min-width: 500px) {
-            .form-signin {
-                padding: 0 30px;
-            }
+    @media screen and (max-width: 500px) {
+
         }
 
 
 </style>
 
-<div class="container p-2" style="max-height: 100vh;">
+<!--<div class="container p-2" style="max-height: 100vh; min-width: 100vw;">-->
 
-    <div class="mt-2">
+    <div class="mt-4">
         <!--    <div class="">-->
         <a href="" class="text-decoration-none d-flex align-items-center">
             <i class="off-color bi fs-5 bi-chevron-left"></i>
@@ -50,34 +48,45 @@
     </div>
     <!--</div>-->
     <main class="d-flex flex-column align-items-center form-signin pt-5">
-        <div class="align-items-center w-50">
+<!--        <div class="align-items-center">-->
             <form method="POST" action="">
 
-                <div class="text-center">
-                    <img width="200" src="{% static 'app_images/Asset2.png' %}" alt="">
+                <div class="d-flex align-items-center justify-content-center">
+                    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                    <lottie-player src="https://lottie.host/e0127ad0-b915-4ca2-a7c8-13e822b559f5/NcNzeuLyM6.json"
+                                   background="transparent" speed="0.5" style="width: 150px; height: 150px" loop
+                                   autoplay direction="1" mode="normal">
+
+                    </lottie-player>
+                    <!--                    <img width="200" src="{% static 'app_images/Asset2.png' %}" alt="">-->
                 </div>
 
                 <fieldset>
-                    {% comment %} <legend>Please sign in</legend> {% endcomment %}
-                    <h6 class="h4 my-3 fw-normal text-center up"><strong>Please sign in</strong></h6>
+                    {% comment %}
+                    <legend>Please sign in</legend>
+                    {% endcomment %}
+                    <h6 class="h4 fw-normal text-center up"><strong>Please sign in</strong></h6>
 
                     {% csrf_token %}
                     {{ form|crispy }}
-                    
+
                     <br>
 
-                    <button class="btn btn-outline-secondary rounded-5 w-100 py-2" style="color: #EEEEEE;" type="submit"><strong>Sign in</strong></button>
-                </fieldset>  
+                    <button class="btn btn-control btn-outline-secondary w-100" style="color: #EEEEEE;"
+                            type="submit"><strong>Sign in</strong></button>
+                </fieldset>
                 <br>
 
-                <p class="mt-3 text-center"><small>Don't have an account &nbsp | &nbsp<a href="{% url 'authusers:register' %}" class="off-color text-decoration-none">Register</small></a></p>
+                <p class="mt-3 text-center"><small>Don't have an account &nbsp | &nbsp
+                    <a href="{% url 'authusers:register' %}" class="off-color text-decoration-none">Register</a></small></p>
 
                 <br>
 
-                <p class="mt-5 mb-3 text-center" style="opacity: 0.2;"><strong><small>&copy; 2024 Analytic and Web Services Ltd</small></strong></p>
+                <p class="mt-5 mb-3 text-center" style="opacity: 0.2;"><strong><small>&copy; 2024 Analytic and Web
+                    Services Ltd</small></strong></p>
             </form>
-        </div>
+<!--        </div>-->
     </main>
-</div>
+<!--</div>-->
 
 {% endblock %}

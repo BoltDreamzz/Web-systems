@@ -13,7 +13,7 @@ def home(request):
     testimonials = Testimonial.objects.all()
     project_count = projects.count()
 
-    technologies = Technology.objects.all()
+    technologies = Technology.objects.all()[:3]
 
     context = {
         "projects": projects,

@@ -37,7 +37,9 @@ def login_view(request):
             user = authenticate(username=username, password=password)
 
             if user is not None:
+                name = form.cleaned_data.get(username)
                 login(request, user)
+                messages.success(request, f"Welcome !")
 
                 return redirect("core:home")  # Redirect to dashboard later
 
@@ -47,6 +49,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
+    messages.info(request, f"Signed out")
     return redirect("core:home")
 
 
