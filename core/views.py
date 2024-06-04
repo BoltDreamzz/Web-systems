@@ -9,7 +9,7 @@ from .forms import CommentForm
 
 def home(request):
     projects = Project.objects.all()
-
+    # messages.success(request, "Waddup fam!")
     testimonials = Testimonial.objects.all()
     project_count = projects.count()
 

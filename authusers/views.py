@@ -6,23 +6,38 @@ from .forms import UserRegisterForm, UserLoginForm
 
 
 def register(request):
-    form = UserRegisterForm()
-
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
-        if form.is_valid:
-            # user = form.save(commit=False)
-            # user.bio = request.user.bio
-            # user.city = request.user.city
-            # user.country = request.user.country
-            form.save()
 
+        if form.is_valid():
+            user = form.save()
             username = form.cleaned_data.get("username")
-            messages.success(request, f"Username @{username} was created successfully!")
+            messages.success(request, f"Registered as '{username}'. Now log in.")
             return redirect("authusers:login")
+    else:
+        form = UserRegisterForm()
+    return render(request, "authusers/register.html", {
+        "form": form,
+    })
 
-    context = {"form": form}
-    return render(request, "authusers/register.html", context)
+# def register(request):
+#     form = UserRegisterForm()
+
+#     if request.method == "POST":
+#         form = UserRegisterForm(request.POST)
+#         if form.is_valid:
+#             user = form.save(commit=False)
+#             # user.bio = request.user.bio
+#             # user.city = request.user.city
+#             # user.country = request.user.country
+#             # form.save()
+
+#             username = form.cleaned_data.get("username")
+#             messages.success(request, f"Username @{username} was created successfully!")
+#             return redirect("authusers:login")
+
+#     context = {"form": form}
+#     return render(request, "authusers/register.html", context)
 
 
 def login_view(request):

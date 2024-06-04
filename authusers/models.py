@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     username = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
+    image = models.ImageField(upload_to="profile-photos", default="default.png", null=True)
     
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

@@ -9,18 +9,31 @@
     .message-icon {
         display: none;
     }
+    .ddd {
+        position: fixed;
+        top: 15vh;
+        width: 65%;
+        border-radius: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .mmt {
+        padding-top: 20vh;
+    }
+    .mmtt {
+        margin-top: 20vh;
+    }
 </style>
-<div class="container">
-    <div class="d-flex text-center flex-column bg-body-tertiary rounded-4 shadow-sm">
-        <h5 class="text-center mt-3">{{ representative.representative.name }} <i class='bx text-primary fs-4 bxs-badge-check start-50 top-0'></i></h5>
+<div class="container d-flex align-items-center justify-content-center">
+    <div class="d-flex ddd text-center flex-column bg-body-tertiary rounded-4 border">
+        <h6 class="text-center mt-3 fw-bold">{{ representative.representative.name }} <i class='bx text-primary fs-5 bxs-badge-check start-50 top-0'></i></h5>
         <p><i>Typically replies under 1 hour...</i></p>
 
     </div>
-    <hr>
-    <br><br>
+    <br><br><br><br>
 
     {%if conversation.messages%}
-    <div class="container bg-body-tertiary rounded-3">
+    <div class="container mmtt bg-body-tertiary rounded-3">
         {% for message in conversation.messages.all %}
 
         <div class="container rounded-5 p-3 d-flex flex-column">
@@ -50,7 +63,7 @@
         </form>
     </div>
     {%else%}
-    <div class="container mt-3 text-center">
+    <div class="container mmt mt-3 text-center">
         <h4>Start chatting</h4>
         <img width="200" src="{%static 'app_images/dog.gif'%}" alt="">
         <form method="post">

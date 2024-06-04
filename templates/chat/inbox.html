@@ -6,49 +6,52 @@
     .message-icon {
         display: none;
     }
+
     .scrollable-row {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-}
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 
-.item {
-    flex: 0 0 auto;
-    margin-right: 25px;
-    text-align: center;
-}
+    .item {
+        flex: 0 0 auto;
+        margin-right: 25px;
+        text-align: center;
+    }
 
-.item img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-}
+    .item img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 
-.item p {
-    margin-top: 5px;
-    font-size: 14px;
-}
-.bttb {
-    padding: 10px 18px;
-    margin-top: 20px;
-    border-radius: 10px;
-}
+    .item p {
+        margin-top: 5px;
+        font-size: 14px;
+    }
+
+    .bttb {
+        padding: 10px 18px;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
 </style>
 
 <!--AcTIVE MEMBERS-->
 
-<h1 class="mt-3">Chats</h1>
-<!--<div class="alert alert-info justify-content-center d-flex align-items-center" role="alert">-->
-<!--    <i class="bi fs-4 bi-chat-square-text-fill mb-4 mx-3"></i>-->
-<!--    <div class="d-flex flex-column">-->
-<!--        <h4> Welcome to messaging.</h4>-->
-<!--        <h6>If you have any enquiries please Speak to any of our <strong>representatives right away</strong></h6>-->
-<!--        <small class="text-muted"><i>Typically replies under 1 hour</i></small>-->
-<!--    </div>-->
-
-
-<!--</div>-->
+<h1 class="mt-3 fw-bold">Chats</h1>
+<div class="container">
+    <div class="alert alert-info border-dark-subtle d-flex align-items-center justify-content-center gap-2">
+        <script src="https://cdn.lordicon.com/lordicon.js"></script>
+        <lord-icon src="https://cdn.lordicon.com/lznlxwtc.json"
+         trigger="in" delay="1300"
+         style="width:35px;height:35px">
+        </lord-icon>
+        <p class="text-center mt-3">Welcome to messaging, choose a <span class="fw-bold">representative</span> to chat with
+        </p>
+    </div>
+</div>
 <br>
 <div class="d-flex align-items-center">
     <form class="w-100 me-3" role="search">
@@ -58,10 +61,10 @@
     <div class="flex-shrink-0 dropdown">
 
         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
-           aria-expanded="false">
+            aria-expanded="false">
             <i class='bx fs-3 bxs-sort-alt'></i>
         </a>
-        <ul class="dropdown-menu text-small shadow">
+        <!-- <ul class="dropdown-menu text-small shadow">
             <li><a class="dropdown-item" href="#">New project...</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -69,35 +72,30 @@
                 <hr class="dropdown-divider">
             </li>
             <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
+        </ul> -->
     </div>
 </div>
-<h5 class="my-2">Our representatives <small class="badge bg-body-tertiary text-primary"><i>Reply under 1
-    hour</i></small></h5>
+<div class="d-flex justify-items-start align-items-center gap-2">
+    <h5 class="my-2 fw-bold">Our representatives</h5>
+    <span style="font-size: 0.8em;" class="badge bg-body-tertiary text-primary"><i>Reply under 1
+        hour</i></span>
+</div>
+
 <div class="scrollable-row bg-body-tertiary px-4 pt-2 rounded-4">
     {%for rep in representatives%}
     <div class="item">
         <a href="{%url 'chat:send_message' rep.id%}" class="text-decoration-none position-relative text-dark pt-4 mt-3">
-            <i class='bx text-primary fs-4 bxs-badge-check position-absolute start-50 top-0'></i>
+            <i class='bx text-primary fs-4 bxs-badge-check position-absolute start-50 top-50'></i>
 
             <img width="45" height="45" class="border border-dark " src="{{rep.representative.image.url}}" alt="User 1">
             <p class="fw-bold">{{rep.representative.name}}</p>
         </a>
     </div>
     {%endfor%}
-    <!--    <div class="item">-->
-    <!--        <a href="#" class="text-decoration-none text-dark d-flex align-items-center">-->
-    <!--            <span class="p-3 bg-body-secondary rounded-5 text-center">-->
-    <!--                <i class='bx fs-3 text-muted bx-plus'></i>-->
-    <!--            </span>-->
-    <!--&lt;!&ndash;            <img width="45" height="45" class="border border-dark" src="{%static 'app_images/plus.gif'%}" alt="User 1">&ndash;&gt;-->
-    <!--&lt;!&ndash;            <p>More</p>&ndash;&gt;-->
-    <!--        </a>-->
-    <!--    </div>-->
 
 </div>
 <!--<hr>-->
-<h5 class="my-2">Conversations</h5>
+<h5 class="my-2 fw-bold">Conversations</h5>
 <div class="d-flex w-100" style="">
     {%if conversations%}
     <div class="container-fluid d-flex flex-column mt-2">
@@ -105,9 +103,9 @@
         <a href="{% url 'chat:conversation_detail' conversation.representative.id %}" class="text-decoration-none my-2">
             <div class="bg-body-tertiary w-100 rounded-4 d-flex p-4 align-items-center">
                 <img width="60" height="60" class="border border-dark rounded-circle mx-3" style="object-fit: cover;"
-                     src="{{conversation.representative.representative.image.url}}" alt="User 1">
+                    src="{{conversation.representative.representative.image.url}}" alt="User 1">
                 <a class="text-decoration-none text-dark mx-3"
-                   href="{% url 'chat:conversation_detail' conversation.representative.id %}">{{conversation.representative.representative.name}}
+                    href="{% url 'chat:conversation_detail' conversation.representative.id %}">{{conversation.representative.representative.name}}
                     <i class='bx text-primary fs-5 bxs-badge-check'></i>
                 </a>
             </div>
@@ -121,8 +119,8 @@
         <div class="d-flex align-items-center justify-content-center">
             <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
             <lottie-player src="https://lottie.host/0b2ec5d0-ba53-40ae-b405-d42aecf0d67d/1XnOGyUHfy.json"
-                           background="##FFFFFF" speed="0.5" style="width: 250px; height: 250px" loop autoplay
-                           direction="1" mode="normal">
+                background="##FFFFFF" speed="0.5" style="width: 250px; height: 250px" loop autoplay direction="1"
+                mode="normal">
 
             </lottie-player>
 
@@ -141,7 +139,8 @@
                 <i class='bx fs-3 text-muted bxs-lock'></i>
                 <!--                <i class='bx bxs-lock' ></i>-->
                 <div class="text-center">
-                    <small class="text-muted text-start w-75">Your chats are <span class="text-primary">end-to-end encrypted.</span></small>
+                    <small class="text-muted text-start w-75">Your chats are <span class="text-primary">end-to-end
+                            encrypted.</span></small>
 
                 </div>
             </div>
@@ -159,12 +158,8 @@
                 </div>
                 <div class="toast-body d-flex gap-3 align-items-center">
                     <script src="https://cdn.lordicon.com/lordicon.js"></script>
-                    <lord-icon
-                            src="https://cdn.lordicon.com/axteoudt.json"
-                            trigger="in"
-                            state="in-help-center"
-                            delay="1000"
-                            style="width:50px;height:50px">
+                    <lord-icon src="https://cdn.lordicon.com/axteoudt.json" trigger="in" state="in-help-center"
+                        delay="1000" style="width:50px;height:50px">
                     </lord-icon>
                     <div class="d-flex flex-column mt-3">
                         <p class="text-start">
